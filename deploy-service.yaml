@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  demo-app-deployment
+  namespace: default
+  labels:
+    app:  demo-app
+spec:
+  selector:
+    matchLabels:
+      app: demo-app
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  demo-app
+    spec:
+      containers:
+      - name:  demo-app
+        image:  sharmajeetesh/demo:3
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 250m
+            memory: 500Mi
+        ports:
+        - containerPort:  8081
+          name:  demo-app
+      restartPolicy: Always
+      imagePullSecrets:
+            
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-demo-service
+  namespace: default
+spec:
+  selector:
+    app: app-demo
+  type: NodePort
+  ports:
+  - name: app-demo
+    protocol: TCP
+    port: 8081
+    targetPort: 8081
+    nodePort: 30634
