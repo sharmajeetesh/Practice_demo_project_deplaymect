@@ -36,6 +36,7 @@ spec:
           name:  demo-app
       restartPolicy: Always
       imagePullSecrets:
+        - name: docker-secret-new1
             
 
 ---
