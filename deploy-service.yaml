@@ -47,7 +47,7 @@ metadata:
   namespace: default
 spec:
   selector:
-    app: app-demo
+    app: demo-app
   type: NodePort
   ports:
   - name: app-demo
