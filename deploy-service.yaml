@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name:  demo-app
-        image:  sharmajeetesh/demo:3
+        image:  sharmajeetesh/demo:4
         imagePullPolicy: Always
         resources:
           requests:
